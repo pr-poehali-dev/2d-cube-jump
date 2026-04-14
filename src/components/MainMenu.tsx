@@ -5,6 +5,8 @@ import Icon from '@/components/ui/icon';
 interface Props {
   onPlay: () => void;
   onLevels: () => void;
+  onRecords: () => void;
+  onSettings: () => void;
 }
 
 const particles = Array.from({ length: 20 }, (_, i) => ({
@@ -17,7 +19,7 @@ const particles = Array.from({ length: 20 }, (_, i) => ({
   color: ['#FF006E', '#FB5607', '#FFBE0B', '#8338EC', '#3A86FF', '#06D6A0'][Math.floor(Math.random() * 6)],
 }));
 
-export default function MainMenu({ onPlay, onLevels }: Props) {
+export default function MainMenu({ onPlay, onLevels, onRecords, onSettings }: Props) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -52,7 +54,6 @@ export default function MainMenu({ onPlay, onLevels }: Props) {
         <div className="logo-block">
           <div className="logo-glow" />
           <h1 className="game-title">NEON<span>RUN</span></h1>
-          <p className="game-subtitle">ВЫЖИВИ В НЕОНОВОМ МИРЕ</p>
         </div>
 
         <div className="menu-buttons">
@@ -64,11 +65,11 @@ export default function MainMenu({ onPlay, onLevels }: Props) {
             <Icon name="LayoutGrid" size={22} />
             УРОВНИ
           </button>
-          <button className="btn-game btn-outline" onClick={() => handle(() => {})}>
+          <button className="btn-game btn-outline" onClick={() => handle(onRecords)}>
             <Icon name="Trophy" size={22} />
             РЕКОРДЫ
           </button>
-          <button className="btn-game btn-outline" onClick={() => handle(() => {})}>
+          <button className="btn-game btn-outline" onClick={() => handle(onSettings)}>
             <Icon name="Settings" size={22} />
             НАСТРОЙКИ
           </button>

@@ -4,8 +4,10 @@ import LevelSelect from '@/components/LevelSelect';
 import GameScreen from '@/components/GameScreen';
 import DeathScreen from '@/components/DeathScreen';
 import VictoryScreen from '@/components/VictoryScreen';
+import LeaderboardScreen from '@/components/LeaderboardScreen';
+import SettingsScreen from '@/components/SettingsScreen';
 
-type Screen = 'menu' | 'levels' | 'game' | 'death' | 'victory';
+type Screen = 'menu' | 'levels' | 'game' | 'death' | 'victory' | 'records' | 'settings';
 
 const MAX_LEVEL = 6;
 
@@ -13,7 +15,9 @@ export default function Index() {
   const [screen, setScreen] = useState<Screen>('menu');
   const [currentLevel, setCurrentLevel] = useState(1);
   const [lastScore, setLastScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
+  const [bestScores, setBestScores] = useState<Record<number, number>>({});
+
+  const bestScore = bestScores[currentLevel] ?? 0;
 
   const startLevel = (level: number) => {
     setCurrentLevel(level);
@@ -22,13 +26,19 @@ export default function Index() {
 
   const handleDeath = (score: number) => {
     setLastScore(score);
-    if (score > bestScore) setBestScore(score);
+    setBestScores((prev) => ({
+      ...prev,
+      [currentLevel]: Math.max(prev[currentLevel] ?? 0, score),
+    }));
     setScreen('death');
   };
 
   const handleVictory = (score: number) => {
     setLastScore(score);
-    if (score > bestScore) setBestScore(score);
+    setBestScores((prev) => ({
+      ...prev,
+      [currentLevel]: Math.max(prev[currentLevel] ?? 0, score),
+    }));
     setScreen('victory');
   };
 
@@ -38,12 +48,15 @@ export default function Index() {
         <MainMenu
           onPlay={() => startLevel(currentLevel)}
           onLevels={() => setScreen('levels')}
+          onRecords={() => setScreen('records')}
+          onSettings={() => setScreen('settings')}
         />
       )}
       {screen === 'levels' && (
         <LevelSelect
           onBack={() => setScreen('menu')}
           onSelectLevel={startLevel}
+          bestScores={bestScores}
         />
       )}
       {screen === 'game' && (
@@ -75,6 +88,17 @@ export default function Index() {
           onRestart={() => startLevel(currentLevel)}
           onMenu={() => setScreen('menu')}
           onLevels={() => setScreen('levels')}
+        />
+      )}
+      {screen === 'records' && (
+        <LeaderboardScreen
+          bestScores={bestScores}
+          onBack={() => setScreen('menu')}
+        />
+      )}
+      {screen === 'settings' && (
+        <SettingsScreen
+          onBack={() => setScreen('menu')}
         />
       )}
     </div>

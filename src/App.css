@@ -1,3 +1,204 @@
+/* ==================== LEADERBOARD ==================== */
+.lb-summary {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 20px 32px;
+  width: 100%;
+  justify-content: center;
+}
+
+.lb-summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.lb-summary-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.2em;
+  font-family: "Rubik", sans-serif;
+}
+
+.lb-summary-value {
+  font-size: 32px;
+}
+
+.lb-summary-divider {
+  width: 1px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.lb-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.15s;
+}
+
+.lb-row-done {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 190, 11, 0.2);
+}
+
+.lb-row-done:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 190, 11, 0.4);
+}
+
+.lb-row-empty {
+  background: rgba(255, 255, 255, 0.02);
+  opacity: 0.5;
+}
+
+.lb-rank {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.3);
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.lb-name {
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  flex: 1;
+  letter-spacing: 0.05em;
+}
+
+.lb-score {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  color: #ffbe0b;
+  min-width: 80px;
+  justify-content: flex-end;
+}
+
+.lb-not-played {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 18px;
+}
+
+/* ==================== SETTINGS ==================== */
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+
+.settings-row:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.settings-row-info {
+  cursor: default;
+}
+
+.settings-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.settings-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.1em;
+}
+
+.settings-desc {
+  font-family: "Rubik", sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.03em;
+}
+
+.settings-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 4px 0;
+}
+
+.settings-toggle {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  border-radius: 13px;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.toggle-on {
+  background: linear-gradient(135deg, #06d6a0, #3a86ff);
+  box-shadow: 0 0 12px rgba(6, 214, 160, 0.4);
+}
+
+.toggle-off {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  transition: left 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-on .toggle-thumb {
+  left: 25px;
+}
+.toggle-off .toggle-thumb {
+  left: 3px;
+}
+
+/* ==================== LEVEL BEST SCORE ==================== */
+.level-best {
+  margin-top: 6px;
+  font-family: "Rubik", sans-serif;
+  font-size: 10px;
+  color: rgba(255, 190, 11, 0.7);
+  letter-spacing: 0.05em;
+}
+
 /* ==================== CANVAS GAME ==================== */
 .canvas-wrapper {
   position: absolute;
