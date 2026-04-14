@@ -1,40 +1,1052 @@
-#root {
-  margin: 0 auto;
+/* ==================== GAME ROOT ==================== */
+.game-root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Russo One", sans-serif;
+  position: relative;
+  background: #0a0010;
+}
+
+/* ==================== PARTICLES ==================== */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: float-particle ease-in-out infinite;
+  opacity: 0.6;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+@keyframes float-particle {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-40px) scale(1.3);
+    opacity: 0.8;
+  }
+}
+
+/* ==================== MENU SCREEN ==================== */
+.menu-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    ellipse at 30% 20%,
+    #1a0040 0%,
+    #0a0018 40%,
+    #000510 100%
+  );
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.97);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.menu-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 0, 110, 0.03) 60px,
+      rgba(255, 0, 110, 0.03) 61px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(58, 134, 255, 0.03) 60px,
+      rgba(58, 134, 255, 0.03) 61px
+    );
+  pointer-events: none;
+}
+
+.menu-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.menu-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ==================== LOGO ==================== */
+.logo-block {
+  position: relative;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.logo-glow {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(
+    ellipse,
+    rgba(131, 56, 236, 0.3) 0%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  pointer-events: none;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.game-title {
+  font-family: "Russo One", sans-serif;
+  font-size: clamp(60px, 10vw, 100px);
+  color: #fff;
+  text-shadow:
+    0 0 20px rgba(131, 56, 236, 0.8),
+    0 0 60px rgba(131, 56, 236, 0.4),
+    4px 4px 0 #ff006e,
+    8px 8px 0 #3a86ff;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  animation: title-pulse 3s ease-in-out infinite;
+}
+
+.game-title span {
+  color: #ff006e;
+  text-shadow:
+    0 0 20px rgba(255, 0, 110, 0.9),
+    0 0 60px rgba(255, 0, 110, 0.5),
+    4px 4px 0 #8338ec,
+    8px 8px 0 #ffbe0b;
+}
+
+@keyframes title-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    filter: brightness(1.15);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+.game-subtitle {
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.4em;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+/* ==================== BUTTONS ==================== */
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 320px;
+}
+
+.btn-game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 32px;
+  font-family: "Russo One", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.btn-game::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transition: left 0.4s ease;
+}
+
+.btn-game:hover::before {
+  left: 100%;
+}
+
+.btn-game:active {
+  transform: scale(0.96) translateY(1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff006e, #8338ec);
+  color: #fff;
+  box-shadow:
+    0 0 20px rgba(255, 0, 110, 0.5),
+    0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 30px rgba(255, 0, 110, 0.7),
+    0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #3a86ff, #06d6a0);
+  color: #fff;
+  box-shadow:
+    0 0 20px rgba(58, 134, 255, 0.5),
+    0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 30px rgba(58, 134, 255, 0.7),
+    0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-outline:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+/* ==================== MENU FOOTER ==================== */
+.menu-footer {
+  display: flex;
+  gap: 32px;
+  font-family: "Rubik", sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.1em;
+}
+
+/* ==================== LEVEL SELECT ==================== */
+.levels-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 70% 80%,
+    #001a40 0%,
+    #0a0018 40%,
+    #000510 100%
+  );
+}
+
+.levels-content {
+  gap: 30px;
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
+}
+
+.levels-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.levels-title {
+  font-size: 28px;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(58, 134, 255, 0.6);
+  letter-spacing: 0.15em;
+}
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-family: "Russo One", sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  transition: all 0.15s;
+}
+
+.btn-back:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .levels-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.card {
-  padding: 2em;
+.level-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 20px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
 }
 
-.read-the-docs {
-  color: #888;
+.level-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--level-color);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.level-card:hover::after,
+.level-hovered::after {
+  transform: scaleX(1);
+}
+
+.level-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--level-color) 15%, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.level-hovered .level-glow {
+  opacity: 1;
+}
+
+.level-unlocked:hover {
+  transform: translateY(-4px);
+  border-color: var(--level-color);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.5),
+    0 0 20px color-mix(in srgb, var(--level-color) 30%, transparent);
+}
+
+.level-locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.level-lock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.level-emoji {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.level-number {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.level-name {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.level-difficulty {
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.level-stars {
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.star-filled {
+  color: #ffbe0b;
+}
+.star-empty {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* ==================== GAME SCREEN ==================== */
+.game-screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #050010;
+  cursor: pointer;
+  user-select: none;
+}
+
+.game-hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hud-score {
+  display: flex;
+  flex-direction: column;
+}
+
+.hud-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.2em;
+  font-family: "Rubik", sans-serif;
+}
+
+.hud-value {
+  font-size: 26px;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255, 190, 11, 0.7);
+}
+
+.hud-combo {
+  font-size: 14px;
+  color: #ffbe0b;
+  animation: combo-pop 0.3s ease;
+  text-shadow: 0 0 10px rgba(255, 190, 11, 0.8);
+}
+
+@keyframes combo-pop {
+  0% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.hud-level {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.15em;
+}
+
+.btn-pause {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-pause:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ==================== GAME WORLD ==================== */
+.game-world {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.game-bg-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.layer-1 {
+  background: linear-gradient(to bottom, #050010 0%, #0d0030 60%, #000820 100%);
+}
+
+.layer-2 {
+  background:
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(131, 56, 236, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 30%,
+      rgba(58, 134, 255, 0.08) 0%,
+      transparent 50%
+    );
+}
+
+.layer-3 {
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(255, 0, 110, 0.06) 0%,
+    transparent 60%
+  );
+}
+
+.game-ground {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.ground-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    #ff006e,
+    #8338ec,
+    #3a86ff,
+    #06d6a0,
+    #ffbe0b,
+    #ff006e
+  );
+  background-size: 400% 100%;
+  animation: rainbow-move 3s linear infinite;
+  box-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+}
+
+@keyframes rainbow-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 400% 50%;
+  }
+}
+
+.ground-tile {
+  flex-shrink: 0;
+  width: 80px;
+  height: 58px;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  animation: ground-scroll linear infinite;
+}
+
+@keyframes ground-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-80px);
+  }
+}
+
+/* ==================== PLAYER ==================== */
+.game-player {
+  position: absolute;
+  left: 15%;
+  transition: bottom 0.1s ease-out;
+}
+
+.player-body {
+  font-size: 40px;
+  animation: player-run 0.3s steps(2) infinite;
+}
+
+@keyframes player-run {
+  0% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(-1);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.player-jump .player-body {
+  animation: none;
+  transform: rotate(-15deg);
+}
+
+.player-shadow {
+  width: 30px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  margin: 0 auto;
+  filter: blur(4px);
+}
+
+/* ==================== OBSTACLES ==================== */
+.obstacle {
+  position: absolute;
+  bottom: 122px;
+  width: 28px;
+  height: 44px;
+  background: linear-gradient(to bottom, #ff006e, #8338ec);
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 0 15px rgba(255, 0, 110, 0.6);
+  animation: obstacle-run linear infinite;
+}
+
+.obstacle::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: #ffbe0b;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 190, 11, 0.8);
+}
+
+@keyframes obstacle-run {
+  0% {
+    left: 110%;
+  }
+  100% {
+    left: -5%;
+  }
+}
+
+/* ==================== GAME CONTROLS HINT ==================== */
+.game-controls-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Rubik", sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.2em;
+  pointer-events: none;
+}
+
+/* ==================== DEMO BUTTONS ==================== */
+.game-demo-buttons {
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 20;
+}
+
+.btn-demo {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.05em;
+  transition: all 0.15s;
+  opacity: 0.7;
+}
+
+.btn-demo:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.btn-demo-death {
+  background: rgba(255, 0, 110, 0.3);
+  color: #ff006e;
+  border: 1px solid rgba(255, 0, 110, 0.4);
+}
+
+.btn-demo-win {
+  background: rgba(255, 190, 11, 0.2);
+  color: #ffbe0b;
+  border: 1px solid rgba(255, 190, 11, 0.4);
+}
+
+/* ==================== PAUSE OVERLAY ==================== */
+.pause-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.pause-visible {
+  opacity: 1;
+}
+
+.pause-panel {
+  background: rgba(10, 0, 30, 0.95);
+  border: 1px solid rgba(131, 56, 236, 0.4);
+  border-radius: 12px;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-shadow:
+    0 0 60px rgba(131, 56, 236, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  min-width: 320px;
+}
+
+.pause-stripe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff006e, #8338ec, #3a86ff);
+  animation: rainbow-move 2s linear infinite;
+  background-size: 300% 100%;
+}
+
+.pause-icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(131, 56, 236, 0.2);
+  border: 2px solid rgba(131, 56, 236, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8338ec;
+  box-shadow: 0 0 20px rgba(131, 56, 236, 0.3);
+}
+
+.pause-title {
+  font-size: 32px;
+  color: #fff;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 20px rgba(131, 56, 236, 0.6);
+}
+
+.pause-stats {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.pause-stat {
+  text-align: center;
+}
+
+.pause-stat-label {
+  display: block;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.2em;
+  font-family: "Rubik", sans-serif;
+  margin-bottom: 4px;
+}
+
+.pause-stat-value {
+  display: block;
+  font-size: 28px;
+  color: #fff;
+}
+
+.pause-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.pause-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+/* ==================== DEATH SCREEN ==================== */
+.death-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.death-visible {
+  opacity: 1;
+}
+
+.death-cracks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.crack {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 40vmax;
+  background: linear-gradient(to bottom, rgba(255, 0, 110, 0.6), transparent);
+  transform-origin: top center;
+  transform: translateX(-50%) rotate(var(--crack-angle));
+  animation: crack-appear 0.5s ease forwards;
+  opacity: 0;
+}
+
+@keyframes crack-appear {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) rotate(var(--crack-angle)) scaleY(0);
+  }
+  60% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.3;
+    transform: translateX(-50%) rotate(var(--crack-angle)) scaleY(1);
+  }
+}
+
+.death-panel {
+  background: rgba(20, 0, 5, 0.95);
+  border: 1px solid rgba(255, 0, 110, 0.4);
+  border-radius: 12px;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow:
+    0 0 60px rgba(255, 0, 110, 0.25),
+    0 20px 60px rgba(0, 0, 0, 0.7);
+  position: relative;
+  overflow: hidden;
+  min-width: 340px;
+}
+
+.death-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff006e, #fb5607, #ffbe0b);
+  animation: rainbow-move 1.5s linear infinite;
+  background-size: 300% 100%;
+}
+
+.death-shake {
+  animation: shake 0.08s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(6px) rotate(1deg);
+  }
+}
+
+.death-skull {
+  font-size: 60px;
+  animation: skull-appear 0.4s ease;
+  filter: drop-shadow(0 0 15px rgba(255, 0, 110, 0.6));
+}
+
+@keyframes skull-appear {
+  0% {
+    transform: scale(0) rotate(-30deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2) rotate(5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.death-title {
+  font-size: 30px;
+  color: #ff006e;
+  text-shadow: 0 0 20px rgba(255, 0, 110, 0.7);
+  letter-spacing: 0.15em;
+  animation: glitch-text 2s steps(2) infinite;
+}
+
+@keyframes glitch-text {
+  0%,
+  95%,
+  100% {
+    text-shadow: 0 0 20px rgba(255, 0, 110, 0.7);
+    transform: none;
+  }
+  96% {
+    text-shadow:
+      -3px 0 #3a86ff,
+      3px 0 #06d6a0;
+    transform: translateX(2px);
+  }
+  98% {
+    text-shadow:
+      3px 0 #3a86ff,
+      -3px 0 #ff006e;
+    transform: translateX(-2px);
+  }
+}
+
+.new-record {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 190, 11, 0.15);
+  border: 1px solid rgba(255, 190, 11, 0.5);
+  color: #ffbe0b;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  animation: record-glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes record-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 190, 11, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 190, 11, 0.5);
+  }
+}
+
+.death-stats {
+  display: flex;
+  gap: 20px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+.death-stat {
+  text-align: center;
+}
+
+.death-stat-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.2em;
+  font-family: "Rubik", sans-serif;
+  margin-bottom: 4px;
+}
+
+.death-stat-value {
+  font-size: 22px;
+  color: #fff;
+}
+
+.death-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }

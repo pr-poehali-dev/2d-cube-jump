@@ -1,14 +1,59 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import MainMenu from '@/components/MainMenu';
+import LevelSelect from '@/components/LevelSelect';
+import GameScreen from '@/components/GameScreen';
+import DeathScreen from '@/components/DeathScreen';
 
-const Index = () => {
+type Screen = 'menu' | 'levels' | 'game' | 'death';
+
+export default function Index() {
+  const [screen, setScreen] = useState<Screen>('menu');
+  const [currentLevel, setCurrentLevel] = useState(1);
+  const [lastScore, setLastScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+
+  const startLevel = (level: number) => {
+    setCurrentLevel(level);
+    setScreen('game');
+  };
+
+  const handleDeath = (score: number) => {
+    setLastScore(score);
+    if (score > bestScore) setBestScore(score);
+    setScreen('death');
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
-      </div>
+    <div className="game-root">
+      {screen === 'menu' && (
+        <MainMenu
+          onPlay={() => startLevel(currentLevel)}
+          onLevels={() => setScreen('levels')}
+        />
+      )}
+      {screen === 'levels' && (
+        <LevelSelect
+          onBack={() => setScreen('menu')}
+          onSelectLevel={startLevel}
+        />
+      )}
+      {screen === 'game' && (
+        <GameScreen
+          level={currentLevel}
+          onDeath={handleDeath}
+          onMenu={() => setScreen('menu')}
+        />
+      )}
+      {screen === 'death' && (
+        <DeathScreen
+          level={currentLevel}
+          score={lastScore}
+          bestScore={bestScore}
+          onRestart={() => startLevel(currentLevel)}
+          onMenu={() => setScreen('menu')}
+          onLevels={() => setScreen('levels')}
+        />
+      )}
     </div>
   );
-};
-
-export default Index;
+}
