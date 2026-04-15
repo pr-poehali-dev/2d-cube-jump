@@ -430,7 +430,7 @@ export default function GameScreen({ level, onDeath, onVictory, onMenu, skinId =
             </button>
           </div>
           <button
-            className="dpad-btn dpad-jump rounded-0 font-black text-xs px-0 mx-[25px] py-[19px] my-[77px]"
+            className="dpad-btn dpad-jump rounded-0 font-black text-xs px-0 py-[19px] mx-[94px] my-[116px]"
             onTouchStart={() => { resumeAudio(); dpad('jump', true); }}
             onTouchEnd={() => dpad('jump', false)}
             onMouseDown={() => { resumeAudio(); dpad('jump', true); }}
