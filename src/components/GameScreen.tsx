@@ -375,8 +375,8 @@ export default function GameScreen({ level, onDeath, onVictory, onMenu, skinId =
       <div className="game-hud">
         <div className="hud-left">
           <div className="hud-score">
-            <span className="hud-label">ОЧКИ</span>
-            <span className="hud-value">{score.toLocaleString()}</span>
+            <span className="hud-label my-[1px]">очки</span>
+            <span className="hud-value my-[166px]">{score.toLocaleString()}</span>
           </div>
           <div className="hud-coins">
             <span className="coin-icon">🪙</span>
@@ -384,7 +384,7 @@ export default function GameScreen({ level, onDeath, onVictory, onMenu, skinId =
           </div>
         </div>
         <div className="hud-center">
-          <span className="hud-level">УРОВЕНЬ {level}</span>
+          <span className="hud-level mx-[9px] my-[17px] py-1">УРОВЕНЬ {level}</span>
         </div>
         <div className="hud-right">
           <button className="btn-pause" onClick={() => { playClick(); setPaused(!pausedRef.current); }}>
