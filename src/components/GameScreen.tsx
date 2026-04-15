@@ -394,7 +394,7 @@ export default function GameScreen({ level, onDeath, onVictory, onMenu, skinId =
       </div>
 
       <div className="canvas-wrapper">
-        <canvas ref={canvasRef} width={CANVAS_W} height={CANVAS_H} className="game-canvas" />
+        <canvas ref={canvasRef} width={CANVAS_W} height={CANVAS_H} className="game-canvas text-red-900 py-0" />
         {!showDpad && (
           <div className="canvas-controls">
             <span>← A / → D — ходить</span>
@@ -409,7 +409,7 @@ export default function GameScreen({ level, onDeath, onVictory, onMenu, skinId =
         <div className="dpad-container">
           <div className="dpad-left">
             <button
-              className="dpad-btn dpad-arrow"
+              className="dpad-btn dpad-arrow my-[121px]"
               onTouchStart={() => dpad('left', true)}
               onTouchEnd={() => dpad('left', false)}
               onMouseDown={() => dpad('left', true)}
@@ -419,7 +419,7 @@ export default function GameScreen({ level, onDeath, onVictory, onMenu, skinId =
               <Icon name="ChevronLeft" size={28} />
             </button>
             <button
-              className="dpad-btn dpad-arrow"
+              className="dpad-btn dpad-arrow my-[122px]"
               onTouchStart={() => dpad('right', true)}
               onTouchEnd={() => dpad('right', false)}
               onMouseDown={() => dpad('right', true)}
@@ -430,7 +430,7 @@ export default function GameScreen({ level, onDeath, onVictory, onMenu, skinId =
             </button>
           </div>
           <button
-            className="dpad-btn dpad-jump"
+            className="dpad-btn dpad-jump rounded-0 font-black text-xs px-0 mx-[25px] py-[19px] my-[77px]"
             onTouchStart={() => { resumeAudio(); dpad('jump', true); }}
             onTouchEnd={() => dpad('jump', false)}
             onMouseDown={() => { resumeAudio(); dpad('jump', true); }}
